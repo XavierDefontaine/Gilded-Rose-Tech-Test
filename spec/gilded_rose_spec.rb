@@ -1,31 +1,88 @@
 require './lib/gilded_rose'
-require './lib/texttest_fixture.rb'
 
-# class Item
-#   def initialize(name, sell_in, quality)
+#  Item(name, sell_in, quality)
 
 describe GildedRose do
-
+  
   describe "#update_quality" do
-    it "does not change the name" do
-      items = [Item.new("foo", 0, 0)]
+    it "does not have negative Quality items" do
+      items = [Item.new("+5 Dexterity Vest", 2, 0)]
       GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq "foo"
+      expect(items[0].quality).to eq 0
     end
 
-    context "for standard Items"
-      context "BEFORE the sell by date"
-        it "degrades Quality by one" do
-          items = [Item.new("+5 Dexterity Vest", 10, 20)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 19
-        end
-      context "AFTER the sell by date"
-        it "degrades Quality twice as fast " do
-          items = [Item.new("+5 Dexterity Vest", 0, 20)]
-          GildedRose.new(items).update_quality()
-          expect(items[0].quality).to eq 18
-        end
-  end
+    describe "on STANDARD Items" do
+      let(:name) { "+5 Dexterity Vest" }
+     
+      it "does not have negative Quality items" do
+        items = [Item.new(name, 2, 0)]
+        GildedRose.new(items).update_quality()
+        expect { GildedRose.new(items).update_quality() }.not_to change { items[0].quality }
+      end
+      
+      it "decreases Quality by one BEFORE sell by date" do
+        items = [Item.new(name, 10, 20)]
+        expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by -1
+      end
 
+      it "decreases Quality twice as fast AFTER sell by date" do
+        items = [Item.new(name, 0, 20)]
+        expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by -2
+      end
+
+      it "changes both Quality and SellIn values" do
+        items = [Item.new(name, 0, 0)]
+        GildedRose.new(items).update_quality()
+        expect { GildedRose.new(items).update_quality() }.to change(items[0], :quality && :sell_in).by -1
+      end
+      # it "cannot have a Quality more than 50" 
+      #   items = [Item.new("+5 Dexterity Vest", 0, 50)]
+      #   GildedRose.new(items).update_quality()
+      #   expect(items[0].quality).to eq 50
+      # end
+    end
+
+    describe "on Aged Brie" do
+      let(:name) { "Aged Brie" }
+      it "increases quality the older it gets" do
+        items = [Item.new(name, 10, 20)]
+        GildedRose.new(items).update_quality()
+        expect(items[0].quality).to eq 21
+      end
+
+      it "cannot increase its Quality more than 50" do
+        items = [Item.new(name, 2, 50)]
+        GildedRose.new(items).update_quality()
+        expect { GildedRose.new(items).update_quality() }.not_to change { items[0].quality }
+      end
+    end
+
+    describe "on Backstage passes" do
+      let(:name) { "Backstage passes to a TAFKAL80ETC concert" }
+      it "does not have negative Quality items" do
+        items = [Item.new(name, 2, 0)]
+        GildedRose.new(items).update_quality()
+        expect { GildedRose.new(items).update_quality() }.not_to change { items[0].quality }
+      end
+  
+      context "10 days or less"
+        it "increases quality by 2" do
+          items = [Item.new(name, 10, 20)]
+          expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 2
+        end
+
+      context "5 days or less"
+        it "increases quality by 3" do
+          items = [Item.new(name, 5, 20)]
+          expect { GildedRose.new(items).update_quality() }.to change { items[0].quality }.by 3
+        end
+
+      context "after the concert"
+        it "drops the Quality to ZERO" do
+          items = [Item.new(name, 0, 20)]
+          GildedRose.new(items).update_quality()
+          expect(items[0].quality).to eq 0
+        end
+    end
+  end
 end

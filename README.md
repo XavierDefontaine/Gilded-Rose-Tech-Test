@@ -6,23 +6,17 @@
 We buy and sell only the finest goods. Unfortunately, our goods are constantly degrading in quality as they approach their sell by date. We have a system in place that updates our inventory for us:
 
 ```
-- Once the sell by date has passed, Quality degrades twice as fast.
-```
-
-| INPUT | OUTPUT |
-| ---   | ----------- |
-| +5 Dexterity Vest | 2 days  |
-| Quality: 20 | 19 |
-
-
 - The Quality of an item is:
 * never negative
 * never more than 50
+- BOTH Quality and SellIn values are updated
 
+
+- "Standard Items": Quality degrades twice as fast after sellIn date.
 - “Aged Brie”: increases in Quality the older it gets.
 - “Backstage passes”: increases in Quality as it’s SellIn value approaches; Quality increases by 2 when there are 10 days or less and by 3 when there are 5 days or less but Quality drops to 0 after the concert.
 - “Sulfuras”: never has to be sold or decreases in Quality.
-
+Note: its Quality is 80 and it never alters.
 ```
 
 ```
