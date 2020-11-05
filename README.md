@@ -7,8 +7,8 @@ We buy and sell only the finest goods. Unfortunately, our goods are constantly d
 
 ```
 - The Quality of an item is:
-* never negative
-* never more than 50
+* [x] never negative 
+* [ ] never more than 50
 - BOTH Quality and SellIn values are updated
 
 
