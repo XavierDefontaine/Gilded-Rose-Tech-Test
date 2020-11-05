@@ -13,6 +13,7 @@ class GildedRose
 
   def decrease_quality_twice(item)
     item.quality -= 2 if item.quality.positive?
+    p "Dun it!"
   end
 
   def increase_quality(item)
@@ -32,7 +33,7 @@ class GildedRose
   end
 
   def is_a_standard?(item)
-    !NON_STANDARD_ITEMS.include?(item.name)
+    return item.name if !NON_STANDARD_ITEMS.include?(item.name)
   end
 
   def update_quality
