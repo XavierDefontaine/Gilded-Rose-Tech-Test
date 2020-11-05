@@ -2,6 +2,8 @@
 
 require './lib/refactored_gilded_rose'
 require './lib/item'
+require_relative 'spec_helper'
+
 
 describe GildedRose do
   describe '#update_quality' do

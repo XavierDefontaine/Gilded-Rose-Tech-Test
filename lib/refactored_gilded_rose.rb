@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 require_relative 'item'
-
+ 
 class GildedRose
-  ## Please add any new items that are not standard here:
   NON_STANDARD_ITEMS = ['Aged Brie', 
     'Backstage passes to a TAFKAL80ETC concert', 
     'Sulfuras, Hand of Ragnaros', 
