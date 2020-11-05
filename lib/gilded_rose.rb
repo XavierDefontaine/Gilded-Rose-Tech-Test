@@ -8,11 +8,15 @@ class GildedRose
   end
 
   def decrease_quality(item)
-    item.quality = item.quality - 1 if item.quality.positive?
+    item.quality -= 1 if item.quality.positive?
+  end
+
+  def decrease_quality_twice(item)
+    item.quality -= 2 if item.quality.positive?
   end
 
   def increase_quality(item)
-    item.quality = item.quality + 1 if quality_is_less_than_50?(item)
+    item.quality += 1 if quality_is_less_than_50?(item)
   end
 
   def quality_is_less_than_50?(item)
@@ -23,35 +27,27 @@ class GildedRose
     item.sell_in < 0
   end
 
+  def decrease_sell_in_date(item)
+    item.sell_in -= 1 unless item.name == 'Sulfuras, Hand of Ragnaros'
+  end
+
   def is_a_standard?(item)
     !NON_STANDARD_ITEMS.include?(item.name)
   end
 
   def update_quality
     @items.each do |item|
-      if is_a_standard?(item)
-        decrease_quality(item)
-      else
+      decrease_sell_in_date(item)
+      case item.name
+      when is_a_standard?(item)
+        sell_in_date_passed?(item) ? decrease_quality_twice(item) : decrease_quality(item)
+      when "Aged Brie"
         increase_quality(item)
-        if item.name == 'Backstage passes to a TAFKAL80ETC concert'
+      when 'Backstage passes to a TAFKAL80ETC concert'
+          increase_quality(item)
           increase_quality(item) if item.sell_in < 11
           increase_quality(item) if item.sell_in < 6
-        end
-      end
-
-      # Decreases Sell In date if item is not Sultura
-      item.sell_in = item.sell_in - 1 if item.name != 'Sulfuras, Hand of Ragnaros'
-
-      # Checking if sell in date is negative
-      if sell_in_date_passed?(item)
-
-        if item.name != 'Aged Brie'
-          if item.name != 'Backstage passes to a TAFKAL80ETC concert'
-            decrease_quality(item) if item.name != 'Sulfuras, Hand of Ragnaros'
-          else
-            item.quality = item.quality - item.quality
-          end
-        end
+          item.quality = 0 if sell_in_date_passed?(item)
       end
     end
   end

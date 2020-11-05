@@ -67,20 +67,17 @@ describe GildedRose do
         expect { GildedRose.new(items).update_quality }.not_to change { items[0].quality }
       end
 
-      context '10 days or less'
-      it 'increases quality by 2' do
+      it 'increases quality by 2 if BEFORE 10 days or less' do
         items = [Item.new(name, 10, 20)]
         expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 2
       end
 
-      context '5 days or less'
-      it 'increases quality by 3' do
+      it 'increases quality by 3 if BEFORE 5 days or less' do
         items = [Item.new(name, 5, 20)]
         expect { GildedRose.new(items).update_quality }.to change { items[0].quality }.by 3
       end
 
-      context 'after the concert'
-      it 'drops the Quality to ZERO' do
+      it 'drops the Quality to zero AFTER sell by date' do
         items = [Item.new(name, 0, 20)]
         GildedRose.new(items).update_quality
         expect(items[0].quality).to eq 0
