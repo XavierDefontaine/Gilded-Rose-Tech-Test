@@ -59,6 +59,7 @@ describe GildedRose do
 
     describe "on Backstage passes" do
       let(:name) { "Backstage passes to a TAFKAL80ETC concert" }
+
       it "does not have negative Quality items" do
         items = [Item.new(name, 2, 0)]
         GildedRose.new(items).update_quality()
@@ -83,6 +84,16 @@ describe GildedRose do
           GildedRose.new(items).update_quality()
           expect(items[0].quality).to eq 0
         end
+    end
+
+    describe "on Sulfuras, Hand of Ragnaros" do
+      let(:name) { "Sulfuras, Hand of Ragnaros" }
+      
+      it "does not change its Quality over time" do
+        items = [Item.new(name, 2, 80)]
+        GildedRose.new(items).update_quality()
+        expect { GildedRose.new(items).update_quality() }.not_to change { items[0].quality }
+      end
     end
   end
 end
