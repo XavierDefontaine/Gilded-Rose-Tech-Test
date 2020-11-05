@@ -24,12 +24,12 @@ class GildedRose
   end
 
   def is_a_standard?(item)
-    !NON_STANDARD_ITEMS.include?(item)
+    !NON_STANDARD_ITEMS.include?(item.name)
   end
 
   def update_quality
     @items.each do |item|
-      if item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert' && item.name != 'Sulfuras, Hand of Ragnaros'
+      if is_a_standard?(item)
         decrease_quality(item)
       else
         increase_quality(item)

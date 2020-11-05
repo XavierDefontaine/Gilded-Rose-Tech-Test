@@ -83,7 +83,6 @@ describe GildedRose do
       it 'drops the Quality to ZERO' do
         items = [Item.new(name, 0, 20)]
         GildedRose.new(items).update_quality
-        p "drops the Quality to ZERO"
         expect(items[0].quality).to eq 0
       end
     end
