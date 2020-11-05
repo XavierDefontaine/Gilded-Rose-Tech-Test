@@ -7,7 +7,7 @@ describe GildedRose do
   describe '#update_quality' do
     describe 'on STANDARD Items' do
       let(:name) { '+5 Dexterity Vest' }
-      
+
       it 'does not have negative Quality items' do
         items = [Item.new(name, 2, 0)]
         expect { GildedRose.new(items).update_quality }.not_to change { items[0].quality }
