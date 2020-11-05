@@ -1,7 +1,7 @@
 #!/usr/bin/ruby -w
 # frozen_string_literal: true
 
-require File.join(File.dirname(__FILE__), 'gilded_rose')
+require File.join(File.dirname(__FILE__), 'original_gilded_rose')
 
 puts 'OMGHAI!'
 items = [
@@ -20,6 +20,7 @@ items = [
 days = 3
 days = ARGV[0].to_i + 1 if ARGV.size.positive?
 
+def print_out
 gilded_rose = GildedRose.new items
 (0...days).each do |day|
   puts "-------- day #{day} --------"
@@ -29,4 +30,5 @@ gilded_rose = GildedRose.new items
   end
   puts ''
   gilded_rose.update_quality
+end
 end

@@ -8,7 +8,7 @@ We buy and sell only the finest goods. Unfortunately, our goods are constantly d
 ```
 - The Quality of an item is:
 * [x] never negative 
-* [ ] never more than 50
+* [x] never more than 50
 - BOTH Quality and SellIn values are updated
 
 
@@ -37,6 +37,3 @@ Feel free to make any changes to the UpdateQuality method and add any new code a
 Choose [legacy code](https://github.com/emilybache/GildedRose-Refactoring-Kata) (translated by Emily Bache) in the language of your choice. The aim is to practice good design in the language of your choice. Refactor the code in such a way that adding the new "conjured" functionality is easy.
 
 HINT: Test first FTW!
-
-
-![Tracking pixel](https://githubanalytics.herokuapp.com/course/individual_challenges/gilded_rose.md)
