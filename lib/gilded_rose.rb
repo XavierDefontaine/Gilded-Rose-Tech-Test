@@ -11,6 +11,10 @@ class GildedRose
   def increase_quality(item)
     item.quality = item.quality + 1
   end
+
+  def is_less_than_50?(item)
+    item.quality < 50
+  end
   
 
   def update_quality
@@ -22,16 +26,16 @@ class GildedRose
           end
         end
       else
-        if item.quality < 50
+        if is_less_than_50?(item)
           increase_quality(item)
           if item.name == "Backstage passes to a TAFKAL80ETC concert"
             if item.sell_in < 11
-              if item.quality < 50
+              if is_less_than_50?(item)
                 increase_quality(item)
               end
             end
             if item.sell_in < 6
-              if item.quality < 50
+              if is_less_than_50?(item)
                 increase_quality(item)
               end
             end
@@ -53,7 +57,7 @@ class GildedRose
             item.quality = item.quality - item.quality
           end
         else
-          if item.quality < 50
+          if is_less_than_50?(item)
             increase_quality(item)
           end
         end
