@@ -1,4 +1,4 @@
-# Gilded Rose tech test
+# Gilded Rose Tech Test
 
 ## Index
 * [Overview](#Overview)
