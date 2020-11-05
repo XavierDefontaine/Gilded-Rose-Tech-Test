@@ -9,7 +9,7 @@
 * [My Approach](#Approach)
 
 ## <a name="Overview">Overview:</a>
-My personal take on the famous Gilded Rose refactoring tech test during week 10 at [Makers Academy](http://www.makersacademy.com) with 100% test coverage. 
+My personal take on the famous Gilded Rose refactoring tech test during week 10 at [Makers Academy](http://www.makersacademy.com). 
 
 ## <a name="Description">Description:</a>
 ```
@@ -54,7 +54,7 @@ Restrictions: I could change the update_quality method/add any code but not touc
 ## <a name="Tech">Tech Used:</a>
 * Linter: [Rubocop](https://github.com/rubocop-hq/rubocop)
 * Test framework: [RSpec](https://github.com/rspec/rspec)
-* 100% Test coverage with: [Simplecov]([https://github.com/simplecov-ruby/simplecov)
+* ±100% Test coverage with: [Simplecov]([https://github.com/simplecov-ruby/simplecov)
 * Dependencies management: [Bundler](https://github.com/rubygems/bundler)
   
 ## <a name="Approach">My Approach:</a>
